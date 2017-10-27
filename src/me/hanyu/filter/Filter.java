@@ -1,5 +1,7 @@
 package me.hanyu.filter;
 
+import me.hanyu.cases.Record;
+
 public interface Filter {
-	String filter(String line);
+	Record filter(String line);
 }

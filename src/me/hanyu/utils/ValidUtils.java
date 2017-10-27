@@ -9,7 +9,7 @@ public class ValidUtils {
 	/**
 	 * Check field value equals empty 
 	 * */
-	public static boolean isSetEmpty(String field){
+	public static boolean equalsEmpty(String field){
 		if(field == null){
 			return true;
 		}
