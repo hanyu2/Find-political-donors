@@ -1,7 +1,5 @@
 package me.hanyu.utils;
 
-import java.util.Date;
-
 import me.hanyu.constant.Constants;
 
 public class ValidUtils {
