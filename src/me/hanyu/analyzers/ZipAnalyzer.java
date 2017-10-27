@@ -15,4 +15,10 @@ public class ZipAnalyzer extends Analyzer{
 		return this.filter;
 	}
 
+	@Override
+	public void writeToFile() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -23,7 +23,6 @@ public class DataReader {
 		analyzers.add(new DateAnalyzer());
 		
 		
-		
 		//Read input file line by line
 		while ((strLine = br.readLine()) != null)   {
 			

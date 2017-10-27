@@ -14,5 +14,11 @@ public class DateAnalyzer extends Analyzer{
 	public Filter getFilter() {
 		return this.filter;
 	}
+
+	@Override
+	public void writeToFile() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
