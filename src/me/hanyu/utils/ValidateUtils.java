@@ -2,7 +2,7 @@ package me.hanyu.utils;
 
 import me.hanyu.constant.Constants;
 
-public class ValidUtils {
+public class ValidateUtils {
 	
 	/**
 	 * Check field value equals empty 

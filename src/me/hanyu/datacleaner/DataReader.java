@@ -28,7 +28,7 @@ public class DataReader {
 			for(Analyzer analyzer : analyzers){
 				Record record = analyzer.getFilter().filter(line);
 				if(record != null){
-					
+					analyzer.saveRecord(record, analyzer.getKeyToDonations());
 				}
 			}
 		}

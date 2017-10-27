@@ -2,7 +2,7 @@ package me.hanyu.filter.impl;
 
 import me.hanyu.cases.Record;
 import me.hanyu.filter.Filter;
-import me.hanyu.utils.ValidUtils;
+import me.hanyu.utils.ValidateUtils;
 
 public class DateFilter implements Filter {
 	
@@ -15,13 +15,13 @@ public class DateFilter implements Filter {
 		String transaction_amount = lineSeg[14];
 		String other_id = lineSeg[15];
 		
-		if(!ValidUtils.equalsEmpty(other_id)){
+		if(!ValidateUtils.equalsEmpty(other_id)){
 			return null;
 		}
-		if(!ValidUtils.isValidZip(zip_code)){
+		if(!ValidateUtils.isValidZip(zip_code)){
 			return null;
 		}
-		if(ValidUtils.isEmpty(cmte_id) || ValidUtils.isEmpty(transaction_amount)){
+		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
 			return null;
 		}
 		
