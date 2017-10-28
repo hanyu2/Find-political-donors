@@ -4,11 +4,21 @@ import me.hanyu.cases.Record;
 
 public class StringUtils {
 	/**
-	 * Build output string from record
+	 * Build zip output string from record
 	 * */
-	public static String buildOutput(Record record, int median, int totalTransactionNumber, int totalTransactionAmount){
+	public static String buildZipOutput(Record record, int median, int totalTransactionNumber, int totalTransactionAmount){
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(record.getCmte_id()).append("|").append(record.getZip_code()).append("|")
+		stringBuilder.append(record.getCmteId()).append("|").append(record.getZipCode()).append("|")
+						.append(median).append("|").append(totalTransactionNumber).append("|").append(totalTransactionAmount);
+		return stringBuilder.toString();
+	}
+	
+	/**
+	 * Build date output string
+	 * */
+	public static String buildDateOutput(String recipient, String date, int median, int totalTransactionNumber, int totalTransactionAmount){
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(recipient).append("|").append(date).append("|")
 						.append(median).append("|").append(totalTransactionNumber).append("|").append(totalTransactionAmount);
 		return stringBuilder.toString();
 	}

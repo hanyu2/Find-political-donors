@@ -1,17 +1,12 @@
 package me.hanyu.utils;
 
-import me.hanyu.constant.Constants;
-
 public class ValidateUtils {
 	
 	/**
-	 * Check field value equals empty 
+	 * Check field value is empty 
 	 * */
-	public static boolean equalsEmpty(String field){
-		if(field == null){
-			return true;
-		}
-		return field.toLowerCase().equals(Constants.VALID_EMPTY_FIELD);
+	public static boolean isEmpty(String str) {
+		return str == null || "".equals(str);
 	}
 	
 	/**
@@ -45,10 +40,4 @@ public class ValidateUtils {
 		return "";
 	}
 	
-	/**
-	 *Check field is empty
-	 * */
-	public static boolean isEmpty(String field){
-		return field == null || "".equals(field);
-	}
 }

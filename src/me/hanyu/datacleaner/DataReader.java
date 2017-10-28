@@ -28,12 +28,12 @@ public class DataReader {
 			for(Analyzer analyzer : analyzers){
 				Record record = analyzer.getFilter().filter(line);
 				if(record != null){
-					analyzer.saveRecord(record, analyzer.getKeyToDonations());
+					analyzer.saveRecord(record);
 				}
 			}
 		}
-	
 		//Close the input stream
 		br.close();
+		
 	}
 }

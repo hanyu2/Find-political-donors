@@ -15,7 +15,7 @@ public class DateFilter implements Filter {
 		String transaction_amount = lineSeg[14];
 		String other_id = lineSeg[15];
 		
-		if(!ValidateUtils.equalsEmpty(other_id)){
+		if(!ValidateUtils.isEmpty(other_id)){
 			return null;
 		}
 		if(!ValidateUtils.isValidZip(zip_code)){
@@ -24,7 +24,7 @@ public class DateFilter implements Filter {
 		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
 			return null;
 		}
-		
+		zip_code = zip_code.substring(0, 5);
 		Record record = new Record(cmte_id, zip_code, transaction_date, transaction_amount, other_id);
 		return record;
 	}

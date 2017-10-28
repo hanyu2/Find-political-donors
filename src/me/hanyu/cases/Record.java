@@ -1,59 +1,60 @@
 package me.hanyu.cases;
 
 public class Record {
-	String cmte_id; 
-	String zip_code;
-	String transaction_date;
-	int transaction_amount;
-	String other_id;
+	private String cmteId; 
+	private String zipCode;
+	private String transactionDate;
+	private int transactionAmount;
+	private String otherId;
 	
 	public Record(String cmte_id, String zip_code, String transaction_date, String transaction_amount,
 			String other_id) {
-		this.cmte_id = cmte_id;
-		this.zip_code = zip_code;
-		this.transaction_date = transaction_date;
-		this.transaction_amount = Integer.parseInt(transaction_amount);
-		this.other_id = other_id;
+		this.cmteId = cmte_id;
+		this.zipCode = zip_code;
+		this.transactionDate = transaction_date;
+		this.transactionAmount = Integer.parseInt(transaction_amount);
+		this.otherId = other_id;
 	}
 	
-	public String getCmte_id() {
-		return cmte_id;
+	public String getCmteId() {
+		return cmteId;
 	}
 
-	public void setCmte_id(String cmte_id) {
-		this.cmte_id = cmte_id;
+	public void setCmteId(String cmteId) {
+		this.cmteId = cmteId;
 	}
 
-	public String getZip_code() {
-		return zip_code;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setZip_code(String zip_code) {
-		this.zip_code = zip_code;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
-	public String getTransaction_date() {
-		return transaction_date;
+	public String getTransactionDate() {
+		return transactionDate;
 	}
 
-	public void setTransaction_date(String transaction_date) {
-		this.transaction_date = transaction_date;
+	public void setTransactionDate(String transactionDate) {
+		this.transactionDate = transactionDate;
 	}
 
-	public int getTransaction_amount() {
-		return transaction_amount;
+	public int getTransactionAmount() {
+		return transactionAmount;
 	}
 
-	public void setTransaction_amount(int transaction_amount) {
-		this.transaction_amount = transaction_amount;
+	public void setTransactionAmount(int transactionAmount) {
+		this.transactionAmount = transactionAmount;
 	}
 
-	public String getOther_id() {
-		return other_id;
+	public String getOtherId() {
+		return otherId;
 	}
 
-	public void setOther_id(String other_id) {
-		this.other_id = other_id;
+	public void setOtherId(String otherId) {
+		this.otherId = otherId;
 	}
+	
 	
 }

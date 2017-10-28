@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,27 +40,23 @@ public class ZipAnalyzer extends Analyzer {
 	@Override
 	public void saveRecord(Record record) {
 		List<Integer> donations;
-		String zip = record.getZip_code();
+		String zip = record.getZipCode();
 		if (zipToDonations.containsKey(zip)) {
 			donations = zipToDonations.get(zip);
 		} else {
 			donations = new ArrayList<Integer>();
 		}
-		int insertIndex = Collections.binarySearch(donations, record.getTransaction_amount());
-		if (insertIndex < 0) {
-			insertIndex = -insertIndex + 1;
-		}
-		donations.add(insertIndex, record.getTransaction_amount());
+		ListUtils.insert(record.getTransactionAmount(), donations);
 		zipToDonations.put(zip, donations);
 		writeToFile(record, donations);
 	}
 
-	@Override
 	public void writeToFile(Record record, List<Integer> donations) {
 		int median = ListUtils.getMedian(donations);
 		int totalTransactionNumber = donations.size();
 		int totalTransactionAmount = ListUtils.sum(donations);
-		String outputString = StringUtils.buildOutput(record, median, totalTransactionNumber, totalTransactionAmount);
+		String outputString = StringUtils.buildZipOutput(record, median, totalTransactionNumber, totalTransactionAmount);
+		System.out.println(outputString);
 		try {
 			bw.write(outputString);
 		} catch (IOException e) {

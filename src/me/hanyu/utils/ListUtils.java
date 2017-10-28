@@ -1,6 +1,7 @@
 package me.hanyu.utils;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 public class ListUtils {
@@ -15,7 +16,9 @@ public class ListUtils {
 		}
 		return sum;
 	}
-	
+	/**
+	 * Get median of the list(ordered)
+	 * */
 	public static int getMedian(List<Integer> list){
 		int median;
 		int listSize = list.size();
@@ -26,5 +29,16 @@ public class ListUtils {
 			median = new BigDecimal(String.valueOf(doubleMedian)).setScale(0, BigDecimal.ROUND_HALF_UP).intValue();
 		}
 		return median;
+	}
+	
+	/**
+	 * Insert the num into the right position in the list to make it ordered
+	 * */
+	public static void insert(int num, List<Integer> list){
+		int insertIndex = Collections.binarySearch(list, num);
+		if (insertIndex < 0) {
+			insertIndex = -(insertIndex + 1);
+		}
+		list.add(insertIndex, num);
 	}
 }
