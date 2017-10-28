@@ -30,27 +30,26 @@ public class ZipAnalyzer extends Analyzer {
 		outputStream = new FileOutputStream(output_file_dir);
 		bw = new BufferedWriter(new OutputStreamWriter(outputStream));
 	}
-	
+		
+	/**
+	 * Filter invalid records for this analyzer
+	 */
 	@Override
 	public Record filter(String line) {
 		String[] lineSeg = line.split("\\|");
 		String cmte_id = lineSeg[0];
 		String zip_code = lineSeg[10];
 		String transaction_date = lineSeg[13];
-		//System.out.println(transaction_date);
 		String transaction_amount = lineSeg[14];
 		String other_id = lineSeg[15];
 		
 		if(!ValidateUtils.isEmpty(other_id)){
-			//System.out.println("other_id not empty");
 			return null;
 		}
 		if(!ValidateUtils.isValidZip(zip_code)){
-			//System.out.println("zip not valid" + zip_code);
 			return null;
 		}
 		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
-			//System.out.println("cmte_id transaction amt not valid" + cmte_id + "  " + transaction_amount);
 			return null;
 		}
 		zip_code = zip_code.substring(0, 5);
@@ -58,6 +57,9 @@ public class ZipAnalyzer extends Analyzer {
 		return record;
 	}
 	
+	/**
+	 * Save record to data structure for computation
+	 */
 	@Override
 	public void saveRecord(Record record) {
 		List<Integer> donations;
@@ -67,8 +69,10 @@ public class ZipAnalyzer extends Analyzer {
 		} else {
 			donations = new ArrayList<Integer>();
 		}
+		//insert the element into right place to make the donations ordered
 		ListUtils.insert(record.getTransactionAmount(), donations);
 		zipToDonations.put(zip, donations);
+		//write record to file
 		writeToFile(record, donations);
 	}
 
@@ -77,7 +81,6 @@ public class ZipAnalyzer extends Analyzer {
 		int totalTransactionNumber = donations.size();
 		int totalTransactionAmount = ListUtils.sum(donations);
 		String outputString = StringUtils.buildZipOutput(record, median, totalTransactionNumber, totalTransactionAmount);
-		//System.out.println(outputString);
 		try {
 			bw.flush();
 			bw.write(outputString + "\n");
@@ -86,6 +89,10 @@ public class ZipAnalyzer extends Analyzer {
 		}
 	}
 
+	
+	/**
+	 * Close writer pipe
+	 */
 	@Override
 	public void close()  {
 		try {
