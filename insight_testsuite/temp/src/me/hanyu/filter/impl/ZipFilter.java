@@ -4,8 +4,8 @@ import me.hanyu.cases.Record;
 import me.hanyu.filter.Filter;
 import me.hanyu.utils.ValidateUtils;
 
-public class DateFilter implements Filter {
-	
+public class ZipFilter implements Filter {
+
 	@Override
 	public Record filter(String line) {
 		String[] lineSeg = line.split("\\|");
@@ -18,7 +18,7 @@ public class DateFilter implements Filter {
 		if(!ValidateUtils.isEmpty(other_id)){
 			return null;
 		}
-		if(!ValidateUtils.isValidZip(zip_code)){
+		if(!ValidateUtils.isValidDate(transaction_date)){
 			return null;
 		}
 		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
