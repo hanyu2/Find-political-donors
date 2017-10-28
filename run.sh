@@ -4,6 +4,8 @@
 #
 #python ./src/find_political_donors.py ./input/itcont.txt ./output/medianvals_by_zip.txt ./output/medianvals_by_date.txt
 javac \
--sourcepath ./src/me/hanyu/ \
-./src/me/hanyu/datacleaner/DataReader.java
+-sourcepath ./src/ \
+./src/DataReader.java
+
+java -classpath ./src/ DataReader
 

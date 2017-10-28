@@ -15,7 +15,6 @@ function print_dir_contents {
   echo "Project contents:"
   echo -e "${color_blue}$(ls ${proj_path})${color_norm}"
 }
-
 function find_file_or_dir_in_project {
   local proj_path=$1
   local file_or_dir_name=$2
@@ -57,6 +56,7 @@ function setup_testing_input_output {
 function compare_outputs {
   NUM_OUTPUT_FILES_PASSED=0
   OUTPUT_FILENAME=medianvals_by_zip.txt
+  ls ${GRADER_ROOT}/temp/output
   PROJECT_ANSWER_PATH1=${GRADER_ROOT}/temp/output/${OUTPUT_FILENAME}
   TEST_ANSWER_PATH1=${GRADER_ROOT}/tests/${test_folder}/output/${OUTPUT_FILENAME}
    
@@ -100,8 +100,7 @@ function run_all_tests {
 
     cd ${GRADER_ROOT}/temp
     bash run.sh 2>&1
-    cd ../
-
+    cd ../../
     compare_outputs
   done
 
