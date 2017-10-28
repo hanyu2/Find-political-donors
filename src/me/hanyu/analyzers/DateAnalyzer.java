@@ -10,31 +10,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import me.hanyu.cases.Analyzer;
-import me.hanyu.cases.Record;
 import me.hanyu.constant.Constants;
-import me.hanyu.filter.Filter;
-import me.hanyu.filter.impl.DateFilter;
+import me.hanyu.model.Analyzer;
+import me.hanyu.model.Record;
 import me.hanyu.utils.ListUtils;
 import me.hanyu.utils.StringUtils;
+import me.hanyu.utils.ValidateUtils;
 
 public class DateAnalyzer extends Analyzer{
 	String output_file_dir = Constants.OUTPUT_FILE_DATE_DIR;
-	private Filter filter;
 	private Map<String, Map<String,List<Integer>>> recipientToDateDonations;
 	private FileOutputStream outputStream;
 	private BufferedWriter bw;
 	
 	public DateAnalyzer() throws FileNotFoundException{
-		filter = new DateFilter();
 		recipientToDateDonations = new TreeMap<String, Map<String,List<Integer>>>();
 		outputStream = new FileOutputStream(output_file_dir);
 		bw = new BufferedWriter(new OutputStreamWriter(outputStream));
 	}
 	
 	@Override
-	public Filter getFilter() {
-		return this.filter;
+	public Record filter(String line) {
+		String[] lineSeg = line.split("\\|");
+		String cmte_id = lineSeg[0];
+		String zip_code = lineSeg[10];
+		String transaction_date = lineSeg[13];
+		String transaction_amount = lineSeg[14];
+		String other_id = lineSeg[15];
+		
+		if(!ValidateUtils.isEmpty(other_id)){
+			return null;
+		}
+		if(!ValidateUtils.isValidZip(zip_code)){
+			return null;
+		}
+		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
+			return null;
+		}
+		zip_code = zip_code.substring(0, 5);
+		Record record = new Record(cmte_id, zip_code, transaction_date, transaction_amount, other_id);
+		return record;
 	}
 	
 	@Override

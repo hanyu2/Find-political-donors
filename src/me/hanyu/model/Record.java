@@ -1,4 +1,4 @@
-package me.hanyu.cases;
+package me.hanyu.model;
 
 public class Record {
 	private String cmteId; 

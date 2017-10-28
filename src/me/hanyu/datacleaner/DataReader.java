@@ -9,9 +9,9 @@ import java.util.List;
 
 import me.hanyu.analyzers.DateAnalyzer;
 import me.hanyu.analyzers.ZipAnalyzer;
-import me.hanyu.cases.Analyzer;
-import me.hanyu.cases.Record;
 import me.hanyu.constant.Constants;
+import me.hanyu.model.Analyzer;
+import me.hanyu.model.Record;
 
 public class DataReader {
 	public static void main(String[] args) throws IOException {
@@ -26,7 +26,7 @@ public class DataReader {
 		//Read input file line by line
 		while ((line = br.readLine()) != null)   {
 			for(Analyzer analyzer : analyzers){
-				Record record = analyzer.getFilter().filter(line);
+				Record record = analyzer.filter(line);
 				if(record != null){
 					analyzer.saveRecord(record);
 				}

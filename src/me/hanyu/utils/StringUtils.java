@@ -1,6 +1,6 @@
 package me.hanyu.utils;
 
-import me.hanyu.cases.Record;
+import me.hanyu.model.Record;
 
 public class StringUtils {
 	/**

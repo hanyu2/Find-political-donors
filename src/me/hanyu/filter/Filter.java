@@ -1,6 +1,6 @@
 package me.hanyu.filter;
 
-import me.hanyu.cases.Record;
+import me.hanyu.model.Record;
 
 public interface Filter {
 	Record filter(String line);
