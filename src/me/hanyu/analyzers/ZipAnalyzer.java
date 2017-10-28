@@ -37,20 +37,24 @@ public class ZipAnalyzer extends Analyzer {
 		String cmte_id = lineSeg[0];
 		String zip_code = lineSeg[10];
 		String transaction_date = lineSeg[13];
+		//System.out.println(transaction_date);
 		String transaction_amount = lineSeg[14];
 		String other_id = lineSeg[15];
 		
 		if(!ValidateUtils.isEmpty(other_id)){
+			//System.out.println("other_id not empty");
 			return null;
 		}
-		if(!ValidateUtils.isValidDate(transaction_date)){
+		if(!ValidateUtils.isValidZip(zip_code)){
+			//System.out.println("zip not valid" + zip_code);
 			return null;
 		}
 		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
+			//System.out.println("cmte_id transaction amt not valid" + cmte_id + "  " + transaction_amount);
 			return null;
 		}
 		zip_code = zip_code.substring(0, 5);
-		Record record = new Record(cmte_id, zip_code, transaction_date, transaction_amount, other_id);
+		Record record = new Record(cmte_id, zip_code, transaction_date, Integer.parseInt(transaction_amount), other_id);
 		return record;
 	}
 	

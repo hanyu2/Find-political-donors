@@ -7,13 +7,20 @@ public class Record {
 	private int transactionAmount;
 	private String otherId;
 	
-	public Record(String cmte_id, String zip_code, String transaction_date, String transaction_amount,
+	public Record(String cmte_id, String zip_code, String transaction_date, int transaction_amount,
 			String other_id) {
 		this.cmteId = cmte_id;
 		this.zipCode = zip_code;
 		this.transactionDate = transaction_date;
-		this.transactionAmount = Integer.parseInt(transaction_amount);
+		this.transactionAmount = transaction_amount;
 		this.otherId = other_id;
+	}
+	
+	public Record(String cmteId, String transactionDate, int transactionAmount, String otherId) {
+		this.cmteId = cmteId;
+		this.transactionDate = transactionDate;
+		this.transactionAmount = transactionAmount;
+		this.otherId = otherId;
 	}
 	
 	public String getCmteId() {
