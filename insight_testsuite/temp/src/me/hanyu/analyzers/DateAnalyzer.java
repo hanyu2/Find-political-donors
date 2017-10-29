@@ -30,26 +30,24 @@ public class DateAnalyzer extends Analyzer{
 		bw = new BufferedWriter(new OutputStreamWriter(outputStream));
 	}
 	
+	/**
+	 * Filter invalid records for this analyzer
+	 */
 	@Override
 	public Record filter(String line) {
-		//Split the line into fields
 		String[] lineSeg = line.split("\\|");
 		String cmte_id = lineSeg[0];
 		String transaction_date = lineSeg[13];
-		//System.out.println(transaction_date);
 		String transaction_amount = lineSeg[14];
 		String other_id = lineSeg[15];
 		//Filter invalid records
 		if(!ValidateUtils.isEmpty(other_id)){
-			//System.out.println("other_id not empty");
 			return null;
 		}
 		if(!ValidateUtils.isValidDate(transaction_date)){
-			//System.out.println("not valid date");
 			return null;
 		}
 		if(ValidateUtils.isEmpty(cmte_id) || ValidateUtils.isEmpty(transaction_amount)){
-			//System.out.println("cmte_id transaction amt not valid" + cmte_id + "  " + transaction_amount);
 			return null;
 		}
 
@@ -57,6 +55,9 @@ public class DateAnalyzer extends Analyzer{
 		return record;
 	}
 	
+	/**
+	 * Save record to data structure for computation
+	 */
 	@Override
 	public void saveRecord(Record record) {
 		String recipient = record.getCmteId();
@@ -80,6 +81,9 @@ public class DateAnalyzer extends Analyzer{
 		recipientToDateDonations.put(recipient, dateToDonations);
 	}
 
+	/**
+	 * Write records to file
+	 */
 	private void writeToFile() {
 		for(String recipient : recipientToDateDonations.keySet()){
 			for(String date : recipientToDateDonations.get(recipient).keySet()){
@@ -88,7 +92,6 @@ public class DateAnalyzer extends Analyzer{
 				int totalTransactionNumber = donations.size();
 				int totalTransactionAmount = ListUtils.sum(donations);
 				String outputString = StringUtils.buildDateOutput(recipient, date, median,totalTransactionNumber, totalTransactionAmount);
-				//System.out.println(outputString);
 				try {
 					bw.flush();
 					bw.write(outputString + "\n");
